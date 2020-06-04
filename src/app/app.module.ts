@@ -1,25 +1,30 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserModule } from "@angular/platform-browser";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { NgModule } from "@angular/core";
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import { Routes, RouterModule } from "@angular/router";
+import { DemoModule } from "./demo/demo.module";
+import { AppComponent } from "./app.component";
 
-import { MaterialModule } from './shared/material.module';
-import { FormsModule } from '@angular/forms';
+
+const routes: Routes = [
+  {
+    path: "contactmanager", loadChildren: "./contactmanager/contactmanager.module#ContactmanagerModule" },
+  { path: "demo", loadChildren: "./demo/demo.module#DemoModule" },
+  { path: "**", redirectTo: "contactmanager" },
+];
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     BrowserAnimationsModule,
-    MaterialModule,
-    FormsModule
+    DemoModule,
+    RouterModule.forRoot(routes),
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
